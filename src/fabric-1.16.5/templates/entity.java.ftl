@@ -51,6 +51,20 @@ public class ${name}Entity extends ${extendsClass}Entity {
             .build()
     );
 
+	<#if data.ranged && data.rangedItemType == "Default item">
+	    public static final EntityType arrow = Registry.register(
+	        Registry.ENTITY_TYPE,
+	        ${JavaModName}.id("${registryname}"),
+	        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ${name}Entity::new)
+	        .forceTrackedVelocityUpdates(true)
+	        .trackRangeBlocks(64)
+	        .trackedUpdateRate(1)
+            .entityFactory(ArrowCustomEntity::new)
+	        .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+	        .build()
+	    );
+	</#if>
+
     <#if data.isBoss>
         private final ServerBossBar bossBar;
     </#if>
